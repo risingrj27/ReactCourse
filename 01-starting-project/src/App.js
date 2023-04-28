@@ -1,26 +1,27 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from './components/Cart/Cart'
+import CartContext from "./Store/cartcontext";
 
 function App() {
   const [isModalVisible, setModalVisible] = useState(false)
  
-  const modalVisible = () =>{
+  const showCartHandler = () =>{
     setModalVisible(true)
   }
 
-  const modalNotVisible = () => {
+  const hideCartHandler = () => {
     setModalVisible(false)
   }
   return (
-    <Fragment>
-      {isModalVisible && <Cart onModalClicked={modalNotVisible} />}
-      <Header onModalClicked = {modalVisible} />
+    <CartContext>
+      {isModalVisible && <Cart onModalClicked={hideCartHandler} />}
+      <Header onModalClicked = {showCartHandler} />
       <main>
         <Meals />
       </main>
-    </Fragment>
+    </CartContext>
   );
 }
 
