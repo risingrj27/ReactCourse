@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from './components/Cart/Cart'
-import CartContext from "./Store/cartcontext";
+// import CartContext from "./Store/cartcontext";
+import CartProvider from "./Store/CartProvider";
 
 function App() {
   const [isModalVisible, setModalVisible] = useState(false)
@@ -15,13 +16,13 @@ function App() {
     setModalVisible(false)
   }
   return (
-    <CartContext>
+    <CartProvider>
       {isModalVisible && <Cart onModalClicked={hideCartHandler} />}
       <Header onModalClicked = {showCartHandler} />
       <main>
         <Meals />
       </main>
-    </CartContext>
+    </CartProvider>
   );
 }
 
